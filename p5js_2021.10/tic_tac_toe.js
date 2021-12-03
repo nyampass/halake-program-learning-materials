@@ -7,7 +7,7 @@ let backSound
 let changePlayerSound
 
 function preload(){
-    soundFormats('mp3', 'wav');
+    // soundFormats('mp3', 'wav');
     backSound = loadSound('assets/tempo.mp3')
     changePlayerSound = loadSound('assets/buzz-grid-sounds-wav/bzzzt.wav')
 }
