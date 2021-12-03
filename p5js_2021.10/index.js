@@ -1,5 +1,7 @@
 let animation1
 let animation2
+let player
+let enemies
 
 function setup() {
     pixelDensity(2)
@@ -11,27 +13,20 @@ function setup() {
     const sheet2 = loadSpriteSheet('assets/Pixel Adventure 2/Enemies/Ghost/Idle (44x30).png', 44, 30, 10)
     animation2 = loadAnimation(sheet2)
 
-    setInterval(() => {
-        const sp = createSprite( random(width), random(height), 40, 40)        
-        let type = 1
-        if (random(2) < 1) {
-            sp.addAnimation('default', animation1)
-            type = 1
-        } else {
-            sp.addAnimation('default', animation2)
-            type = 2
-        }
-        sp.velocity.y = random(2) - 1
-        sp.velocity.x = random(2) - 1
-        sp.scale = 4
+    setTimeout(() => {
+      player = createSprite(0, 0, 40, 40)
+      player.addAnimation('default', animation1)
+      player.scale = 4
+    }, 1000)
 
-        sp.onMousePressed = (event) => {
-            sp.remove()
-            if (type == 1)
-                score = score + 100
-            else
-                score = score - 500
-        }
+    enemies = new Group()
+    setInterval(() => {
+        const enemy = createSprite(width / 2, height / 2, 40, 30)
+        enemy.addAnimation('default', animation2)
+        enemy.scale = 2
+        enemy.velocity.x = random(2) - 1
+        enemy.velocity.y = random(2) - 1
+        enemies.push(enemy)
     }, 1000)
 }
 
@@ -40,10 +35,13 @@ let score = 0
 function draw() {
     background(50)
 
-    fill(255)
-    textSize(40)
-    textAlign(CENTER, CENTER)
-    text("SCORE: " + score, width / 2, height / 2)
+    if (player) {
+      player.velocity.x = (mouseX - player.position.x) * 0.1
+      player.velocity.y = (mouseY - player.position.y) * 0.1
+      player.overlap(enemies, (p, e) => {
+        e.remove()
+      })
+    }
 
     drawSprites()
 }
