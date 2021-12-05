@@ -7,13 +7,13 @@ let backSound
 let changePlayerSound
 
 function preload(){
-    backSound = loadSound('assets/tempo.mp3')
-    changePlayerSound = loadSound('assets/buzz-grid-sounds-wav/bzzzt.wav')
+    backSound = loadSound('assets/sounds/tempo.mp3')
+    changePlayerSound = loadSound('assets/sounds/bzzzt.wav')
 }
 
 function setup() {
     pixelDensity(2)
-    createCanvas(windowWidth - 20, windowHeight - 50) //はみ出してスクロールが起こるため少し縮める（姑息療法）
+    createCanvas(windowWidth, windowHeight)
     
     const sheet1 = loadSpriteSheet('assets/Pixel Adventure 2/Enemies/Chicken/Idle (32x34).png', 32, 34, 13)
     animation1 = loadAnimation(sheet1)

@@ -1,38 +1,24 @@
-let sound;
-let loopFlag = false;
+let sound
+let sound2
 
 function preload() {
-  sound = loadSound("assets/buzz-grid-sounds-wav/zoom3.wav");
+    sound = loadSound("assets/sounds/zoom3.wav")
+    sound2 = loadSound("assets/sounds/ding2.wav")
 }
 
 function setup() {
-  pixelDensity(2);
-  createCanvas(windowWidth - 20, windowHeight - 50);
-  textSize(40);
-  textAlign(CENTER);
-
-  start = createSprite(width / 4, height / 4, width / 2, height / 2);
-  pose = createSprite((width / 4) * 3, height / 4, width / 2, height / 2);
-
-  start.onMousePressed = function () {
-    if (getAudioContext().state !== "running") {
-      getAudioContext().resume();
-    }
-    if (!sound.isPlaying()) {
-      sound.play();
-    }
-  };
-  pose.onMousePressed = function () {
-    if (!sound.isPaused()) {
-      sound.pause();
-    }
-  };
+  createCanvas(windowWidth, windowHeight)
+  userStartAudio()
+  for (let i = 0; i < 20; i++) {
+    const sp = createSprite(
+      random() * width, random() * height, 
+      40, 40)
+    sp.onMousePressed = function() {
+      sound2.play()
+    } 
+  }
 }
 
 function draw() {
-  background(50);
-  fill(255);
-  drawSprites();
-  text("play", width / 4, height / 4);
-  text("stop", (width / 4) * 3, height / 4);
+  drawSprites()
 }
