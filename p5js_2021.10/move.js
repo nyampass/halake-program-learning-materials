@@ -1,6 +1,6 @@
 let animation
-let dragSprite
 let sheet
+let dragSprite
 
 function preload(){
     sheet = loadSpriteSheet('assets/Pixel Adventure 2/Enemies/Chicken/Idle (32x34).png', 32, 34, 13)
@@ -11,7 +11,6 @@ function setup() {
     createCanvas(windowWidth, windowHeight - 50)
     
     animation = loadAnimation(sheet)
-
     sp = createSprite(width/2, height/4*3, 40, 40)
     sp.addAnimation('default', animation)
     sp.scale = (width/5) / 32 //横幅の5分の1のサイズに調整。32は1コマ当たりの横幅
