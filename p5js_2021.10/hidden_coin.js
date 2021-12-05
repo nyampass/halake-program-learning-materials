@@ -2,15 +2,26 @@ let sheet
 let coinSheet
 let dragSprite
 let flag = false
+let backSound
+let clearSound
+let dragSound
 const createSpNum = 4;
 
 function preload(){
     sheet = loadSpriteSheet('assets/Pixel Adventure 2/Enemies/Chicken/Idle (32x34).png', 32, 34, 13)
     coinSheet = loadSpriteSheet('assets/Rocky Roads/coin.png', 16, 16, 4)
+    backSound = loadSound('assets/sounds/tempo.mp3')
+    clearSound = loadSound('assets/sounds/completetask_0.mp3')
+    dragSound = loadSound('assets/sounds/zoom3.wav')
 }
 
 function setup() {
     pixelDensity(2)
+    userStartAudio()
+    clearSound.amp(5)
+    backSound.amp(0.2)
+    dragSound.amp(0.4)
+    backSound.loop()
     createCanvas(windowWidth, windowHeight - 50)
 
     const animation = loadAnimation(sheet)
@@ -63,12 +74,15 @@ function setMoveSprite(sprite, x = width/2, y = height/2){
     sprite.onMousePressed = function() {
       if(dragSprite == null){
         dragSprite = this
+        dragSound.loop()
       }
     }
     sprite.onMouseReleased = function() {
         if(dragSprite == this){
             dragSprite = null
+            dragSound.stop()
             if(this.relate){
+                clearSound.play()
                 flag = true 
             }
         }
