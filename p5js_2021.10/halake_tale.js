@@ -30,34 +30,35 @@ async function setup(){
     dragSprite.setDefaultCollider()
 
     animation = loadAnimation(enemySheet)
-    let spownPosList = [[width/2, height/10], [width/10, height/10*3], [width/10*3, height/10*2], [width/10*7, height/10*2], [width/10*9, height/10*3]] //[[X, Y], ...]
-    spownPosList.filter(function(value){
-        enemySp = createSprite(value[0], value[1], 40, 40)
-        enemySp.addAnimation('default', animation)
-        enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
-        enemySp.setVelocity((width/2 - value[0]) / 300, (height/4*3 - value[1]) / 300)
-        enemySp.addToGroup(enemyGroup)
-    })
-
-    //// 0.5秒おきにランダム生成するプログラム
-    // setInterval(() =>{
-    //     x = random(0, width)
-    //     y = random(0, height)
-    //     let enemySp = createSprite(x, y, 44, 44)
+    //// 生成場所を決め打ち（下記の0.5秒おきに生成のとコメントアウトで入れ替え可能）
+    // let spownPosList = [[width/2, height/10], [width/10, height/10*3], [width/10*3, height/10*2], [width/10*7, height/10*2], [width/10*9, height/10*3]] //[[X, Y], ...]
+    // spownPosList.filter(function(value){
+    //     enemySp = createSprite(value[0], value[1], 40, 40)
     //     enemySp.addAnimation('default', animation)
     //     enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
-    //     enemySp.setVelocity((dragSprite.position.x - x) / 300, (dragSprite.position.y - y) / 300)
-    //     enemyGroup.add(enemySp)
-    // },500)
-    //// しかし、最初に生成されたスプライトにしか”dragSprite.overlap(enemyGroup, ex)”で登録したコールバック関数が発動しない
-    //// Group.size()で確認するとグループにスプライトは登録されているが、最初の生成されたスプライトだけoverlap()で重なりの判定が取れる
+    //     enemySp.setVelocity((width/2 - value[0]) / 300, (height/4*3 - value[1]) / 300)
+    //     enemySp.addToGroup(enemyGroup)
+    // })
+    ////
+
+    //// 0.5秒おきにランダム生成するプログラム
+    setInterval(() =>{
+        x = random(0, width)
+        y = random(0, height)
+        let enemySp = createSprite(x, y, 44, 44)
+        enemySp.addAnimation('default', animation)
+        enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
+        enemySp.setVelocity((dragSprite.position.x - x) / 300, (dragSprite.position.y - y) / 300)
+        enemyGroup.add(enemySp)
+    },500)
+    //// 
 }
 
 function draw(){
     background(50)
     fill(255)
     drawSprites()
-    dragSprite.overlap(enemyGroup, ex)
+    enemyGroup.overlap(dragSprite, ex)
 }
 
 function resetPressPos(){
