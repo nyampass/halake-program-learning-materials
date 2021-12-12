@@ -30,14 +30,16 @@ async function setup(){
     dragSprite.setDefaultCollider()
 
     animation = loadAnimation(enemySheet)
-    let spownPosList = [[width/2, height/10], [width/10, height/10*3], [width/10*3, height/10*2], [width/10*7, height/10*2], [width/10*9, height/10*3]] //[[X, Y], ...]
-    spownPosList.filter(function(value){
-        enemySp = createSprite(value[0], value[1], 40, 40)
-        enemySp.addAnimation('default', animation)
-        enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
-        enemySp.setVelocity((width/2 - value[0]) / 300, (height/4*3 - value[1]) / 300)
-        enemySp.addToGroup(enemyGroup)
-    })
+    //// 生成場所を決め打ち（下記の0.5秒おきに生成のとコメントアウトで入れ替え可能）
+    // let spownPosList = [[width/2, height/10], [width/10, height/10*3], [width/10*3, height/10*2], [width/10*7, height/10*2], [width/10*9, height/10*3]] //[[X, Y], ...]
+    // spownPosList.filter(function(value){
+    //     enemySp = createSprite(value[0], value[1], 40, 40)
+    //     enemySp.addAnimation('default', animation)
+    //     enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
+    //     enemySp.setVelocity((width/2 - value[0]) / 300, (height/4*3 - value[1]) / 300)
+    //     enemySp.addToGroup(enemyGroup)
+    // })
+    ////
 
     //// 0.5秒おきにランダム生成するプログラム
     setInterval(() =>{
