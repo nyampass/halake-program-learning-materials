@@ -40,17 +40,16 @@ async function setup(){
     })
 
     //// 0.5秒おきにランダム生成するプログラム
-    // setInterval(() =>{
-    //     x = random(0, width)
-    //     y = random(0, height)
-    //     let enemySp = createSprite(x, y, 44, 44)
-    //     enemySp.addAnimation('default', animation)
-    //     enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
-    //     enemySp.setVelocity((dragSprite.position.x - x) / 300, (dragSprite.position.y - y) / 300)
-    //     enemyGroup.add(enemySp)
-    // },500)
-    //// しかし、最初に生成されたスプライトにしか”dragSprite.overlap(enemyGroup, ex)”で登録したコールバック関数が発動しない
-    //// Group.size()で確認するとグループにスプライトは登録されているが、最初の生成されたスプライトだけoverlap()で重なりの判定が取れる
+    setInterval(() =>{
+        x = random(0, width)
+        y = random(0, height)
+        let enemySp = createSprite(x, y, 44, 44)
+        enemySp.addAnimation('default', animation)
+        enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
+        enemySp.setVelocity((dragSprite.position.x - x) / 300, (dragSprite.position.y - y) / 300)
+        enemyGroup.add(enemySp)
+    },500)
+    //// 
 }
 
 function draw(){
