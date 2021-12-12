@@ -24,7 +24,7 @@ async function setup(){
     enemyGroup = new Group()
     
     animation = loadAnimation(sheet)
-    dragSprite = createSprite(width/2, height/4*3, 40, 40)
+    dragSprite = createSprite(width/2, height/4*3, 40, 40)// 引数最後にある2つの40は記述しなくても自動でサイズに合わせてくれる
     dragSprite.addAnimation('default', animation)
     dragSprite.scale = (width/5) / 32 //横幅の5分の1のサイズに調整。32は1コマ当たりの横幅
     dragSprite.setDefaultCollider()
@@ -46,9 +46,10 @@ async function setup(){
     setInterval(() =>{
         x = random(0, width)
         y = random(0, height)
-        let enemySp = createSprite(x, y, 44, 44)
+        let enemySp = createSprite(x, y, 44, 44)// 引数最後にある2つの44は記述しなくても自動でサイズに合わせてくれる
         enemySp.addAnimation('default', animation)
         enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
+        enemySp.setCollider('rectangle')
         enemySp.setVelocity((dragSprite.position.x - x) / 300, (dragSprite.position.y - y) / 300)
         enemyGroup.add(enemySp)
         enemySp.debug = true
@@ -60,7 +61,7 @@ function draw(){
     background(50)
     fill(255)
     drawSprites()
-    enemyGroup.overlap(dragSprite, ex)
+    // dragSprite.overlap(enemyGroup, ex) //enemyGroup.overlap(dragSprite, ex)どちらでもよい
 }
 
 function resetPressPos(){
