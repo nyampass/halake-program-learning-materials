@@ -61,7 +61,7 @@ function draw(){
     background(50)
     fill(255)
     drawSprites()
-    // dragSprite.overlap(enemyGroup, ex) //enemyGroup.overlap(dragSprite, ex)どちらでもよい
+    dragSprite.overlap(enemyGroup, ex) //enemyGroup.overlap(dragSprite, ex)どちらでもよい
 }
 
 function resetPressPos(){
