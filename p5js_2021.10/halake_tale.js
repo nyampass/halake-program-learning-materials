@@ -28,6 +28,7 @@ async function setup(){
     dragSprite.addAnimation('default', animation)
     dragSprite.scale = (width/5) / 32 //横幅の5分の1のサイズに調整。32は1コマ当たりの横幅
     dragSprite.setDefaultCollider()
+    dragSprite.debug = true
 
     animation = loadAnimation(enemySheet)
     //// 生成場所を決め打ち（下記の0.5秒おきに生成のとコメントアウトで入れ替え可能）
@@ -50,6 +51,7 @@ async function setup(){
         enemySp.scale = (width/8) / 44 //横幅の8分の1のサイズに調整。44は1コマ当たりの横幅
         enemySp.setVelocity((dragSprite.position.x - x) / 300, (dragSprite.position.y - y) / 300)
         enemyGroup.add(enemySp)
+        enemySp.debug = true
     },500)
     //// 
 }
