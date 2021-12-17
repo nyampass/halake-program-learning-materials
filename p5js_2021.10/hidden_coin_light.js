@@ -30,7 +30,7 @@ function setup() {
             charSp.relate = true // 新しいパラメータを作っておく
         }else{
             charSp = createSprite(w, h)
-            charSp.relate = false　// 新しいパラメータを作っておく
+            charSp.relate = false // 新しいパラメータを作っておく
         }
 
         charSp.addAnimation('default', animation)
